@@ -9,6 +9,8 @@ public class CharacterMovement : MonoBehaviour
 
     public CharacterController Controller;
 
+    public float Speed = 40;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,8 @@ public class CharacterMovement : MonoBehaviour
     public void Move()
     {
         Vector2 input = new Vector2(Input.GetAxis("Horizontal" + PlayerName), Input.GetAxis("Vertical" + PlayerName));
-        Controller.Move(new Vector3(input.x,0, input.y));
+        Vector2 stepAmt = input * Time.deltaTime;
+        Vector3 step = new Vector3(stepAmt.x, 0, stepAmt.y) * Speed;
+        Controller.Move(step);
     }
 }
