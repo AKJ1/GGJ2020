@@ -1,0 +1,18 @@
+﻿
+Create Timers for Interactions.
+Add Button Hold for Interactions.
+Add Shared State for Tools.
+
+_large_ features: 
+Implement Animations.
+Fix Graphics.
+Add Sounds.
+Title Screen.
+
+
+Working: 
+
+Local two-player "co-op".
+Game Loop.
+Failure State.
+Game Restart.

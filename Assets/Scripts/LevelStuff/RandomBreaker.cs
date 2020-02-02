@@ -17,16 +17,23 @@ public class RandomBreaker : MonoBehaviour
 
     void Start()
     {
+        ResetTimer();
+    }
+
+    void ReenumerateBreakables()
+    {
         Breakables = new List<IBreakable>();
         var objs = GameObject.FindObjectsOfType<GameObject>();
         for (int i = 0; i < objs.Length; i++)
         {
             if(objs[i].GetComponent<IBreakable>() != null)
             {
-                Breakables.Add(objs[i].GetComponent<IBreakable>());
+                if (!objs[i].GetComponent<IBreakable>().IsBroken)
+                {
+                    Breakables.Add(objs[i].GetComponent<IBreakable>());
+                }
             }
         }
-        ResetTimer();
     }
     
     void ResetTimer()
@@ -36,7 +43,9 @@ public class RandomBreaker : MonoBehaviour
         var delaySpan = TimeSpan.FromSeconds(delaySecs);
         Observable.Timer(delaySpan).Do(_ =>
         {
-            Breakables[Random.Range(0, Breakables.Count)].Break();
+            ReenumerateBreakables();
+            var chosen = Breakables[Random.Range(0, Breakables.Count - 1)];
+            chosen.Break();
             ResetTimer();
         }).Subscribe();
     }

@@ -8,7 +8,7 @@ using UniRx;
 
 public class ToolSinkInteractable : Interactable, IBreakable
 {
-    public bool IsBroken = true;
+    public bool IsBroken { get; private set; } = false;
 
     public Tool ToolToTake;
 
@@ -23,17 +23,23 @@ public class ToolSinkInteractable : Interactable, IBreakable
 
     public void Break()
     {
-        GameState.Instance.BrokenItems++;
-        rightfulColor = Color.magenta;
-        gameObject.GetComponent<Renderer>().material.SetColor("_BaseColor", Color.magenta);
-        IsBroken = true;
+        if (!IsBroken)
+        {
+            GameState.Instance.BrokenItems++;
+            rightfulColor = Color.magenta;
+            gameObject.GetComponent<Renderer>().material.SetColor("_BaseColor", Color.magenta);
+            IsBroken = true;
+        }
     }
 
     public void Fix()
     {
-        GameState.Instance.BrokenItems--;
-        rightfulColor = Color.white;
-        IsBroken = false;
+        if (IsBroken)
+        {
+            GameState.Instance.BrokenItems--;
+            rightfulColor = Color.white;
+            IsBroken = false;
+        }
     }
 
     public override void InteractStart(PlayerState state)
