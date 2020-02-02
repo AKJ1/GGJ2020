@@ -3180,7 +3180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerName: P1
   Controller: {fileID: 783618623}
-  Speed: 40
+  Speed: 8
 --- !u!114 &783618629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3793,7 +3793,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerName: P2
   Controller: {fileID: 1530700522}
-  Speed: 40
+  Speed: 8
 --- !u!143 &1530700522
 CharacterController:
   m_ObjectHideFlags: 0
